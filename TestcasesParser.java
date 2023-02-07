@@ -9,6 +9,8 @@ import static org.junit.Assert.assertTrue;
 public class TestcasesParser {
 
     static Parser p;
+    static final String PATHWINDOWS = "Beispiele\\";
+    static final String PATHLINUX = "/home/krenze/Programming/Java/Registerparser/Beispiele/";
 
     @BeforeClass
     public static void setup() {
@@ -17,78 +19,131 @@ public class TestcasesParser {
 
     @Test
     public void anbn() {
-        p.setFile(new File("Beispiele\\a_hoch_n_b_hoch_n.txt"));
+        String filename = "a_hoch_n_b_hoch_n.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void rekAdd() {
-        p.setFile(new File("Beispiele\\AdditionRekursiv.txt"));
+        String filename = "AdditionRekursiv.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void rekAddKurz() {
-        p.setFile(new File("Beispiele\\AdditionRekursiv-kurzVersion.txt"));
+        String filename = "AdditionRekursiv-kurzVersion.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void summe() {
-        p.setFile(new File("Beispiele\\Beispiel_2-1_Summe.txt"));
+        String filename = "Beispiel_2-1_Summe.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
+        assertTrue(p.test());
     }
 
     @Test
     public void undef() {
-        p.setFile(new File("Beispiele\\Beispiel_2-2_ÜberallUndefiniert.txt"));
+        String filename = "Beispiel_2-2_ÜberallUndefiniert.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void wertzuweisung() {
-        p.setFile(new File("Beispiele\\Beispiel_2-6_Wertzuweisung.txt"));
+        String filename = "Beispiel_2-6_Wertzuweisung.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void whileLoop() {
-        p.setFile(new File("Beispiele\\Beispiel_2-7_WHILE-Schleife.txt"));
+        String filename = "Beispiel_2-7_WHILE-Schleife.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void ifThen() {
-        p.setFile(new File("Beispiele\\Beispiel_2-8_If_Then_Else.txt"));
+        String filename = "Beispiel_2-8_If_Then_Else.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void listenEnde() {
-        p.setFile(new File("Beispiele\\Beispiel_2-9_ListenEnde-wird-gesucht.txt"));
+        String filename = "Beispiel_2-9_ListenEnde-wird-gesucht.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void binbaumSuche() {
-        p.setFile(new File("Beispiele\\BinärBaum-Suche.txt"));
+        String filename = "BinärBaum-Suche.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void fakultät() {
-        p.setFile(new File("Beispiele\\Fakultät.txt"));
+        String filename = "Fakultät.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void maximum() {
-        p.setFile(new File("Beispiele\\Maximum.txt"));
+        String filename = "Maximum.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 
     @Test
     public void potenz() {
-        p.setFile(new File("Beispiele\\Potenz_n_hoch_m.txt"));
+        String filename = "Potenz_n_hoch_m.txt";
+        File f = null;
+        f = new File(PATHWINDOWS + filename);
+        if (!f.exists()) f = new File(PATHLINUX + filename);
+        p.setFile(f);
         assertTrue(p.test());
     }
 

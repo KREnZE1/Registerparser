@@ -8,27 +8,27 @@ public class Parser {
 
     BufferedReader br;
     ArrayList<String> lines;
-    String[] numericKeywords = new String[] { //Keywords, which need a number afterwards
+    String[] numericKeywords = new String[] { //Keywords which need a number afterwards
         "load",
-        "store", //TODO: Normally you can't have a #0 as the param to store, needs to be fixed
+        "store",
         "add",
         "sub",
         "mul",
         "div"
     };
-    String[] stringKeywords = new String[] { //Keywords, which need a string afterwards
+    String[] stringKeywords = new String[] { //Keywords which need a string afterwards
         "goto",
         "jzero",
         "jnzero"
     };
 
-    String[] otherKeywords = new String[] { //Keywords, which need nothing afterwards
+    String[] otherKeywords = new String[] { //Keywords which need nothing afterwards
         "end"
     };
 
     /**
      * Constructor to create a {@code Parser} without a file.
-     * Creates a list to prevent errors in ther places
+     * Also assigns an empty ArrayList to the internal representation of the lines of the input file
      */
     public Parser() {
         this.lines = new ArrayList<String>();
@@ -146,6 +146,10 @@ public class Parser {
             if (words[wordPos].toLowerCase().equals(numericKeywords[i])) {
                 //Check, if the next word is either *N or N, with N>0 or #N with N>=0
                 String number = words[wordPos+1];
+
+                //Special case: A STORE operation cant have #N as a parameter
+                if (numericKeywords[i].equals("store") && number.charAt(0)=='#') return false;
+
                 if (number.charAt(0) == '#' && Character.isDigit(number.charAt(1)) && number.charAt(1) != '0') {
                     for (int j=2; j<number.length(); j++) if (!Character.isDigit(number.charAt(j))) return false;
                 }
