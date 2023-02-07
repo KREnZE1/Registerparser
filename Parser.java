@@ -68,7 +68,7 @@ public class Parser {
      * Translates the text within the file into seperate lines to analyse
      * @param file a file containing text
      */
-    public void translateFile(File file) {
+    private void translateFile(File file) {
         try {
             br = new BufferedReader(new FileReader(file));
 
@@ -91,7 +91,7 @@ public class Parser {
      * @param line
      * @return whether or not the input is a valid line
      */
-    public boolean validLine(String line) {
+    private boolean validLine(String line) {
         String[] words = removeWhitespaces(line);
 
         //The first word could be a comment
@@ -108,7 +108,7 @@ public class Parser {
      * @param line the line, from which all whitespaces are to be removed
      * @return the line in an array, stripped of all whitespaces
      */
-    public String[] removeWhitespaces(String line) {
+    private String[] removeWhitespaces(String line) {
         char[] characters = line.toCharArray();
         int index = 0;
         while (characters[index] == ((char)9) || characters[index] == ' ') index++; //There can be an infinite amount of whitespaces before the instructions
@@ -135,7 +135,7 @@ public class Parser {
      * @param wordPos position of the word assumed to be an instruction
      * @return whether or not the line contains an instruction
      */
-    public boolean isInstruction(String[] words, int wordPos) {
+    private boolean isInstruction(String[] words, int wordPos) {
         for (int i=0; i<otherKeywords.length; i++) { //Loops through all keywords, which don't need another word after them
             if (words[wordPos].toLowerCase().equals(otherKeywords[i])) { //If any equals the found instruction, the following checks,
                 return endOfInstruction(words, wordPos); // if there is anything after the instruction, which shouldn't be there
@@ -175,7 +175,7 @@ public class Parser {
      * @param words contains all words in the currently checked line
      * @param lastInstruct the position of the last word used to make the instruction whole
      */
-    public boolean endOfInstruction(String[] words, int lastInstruct) {
+    private boolean endOfInstruction(String[] words, int lastInstruct) {
         //An instruction is valid if:
         // - the last used part of the instruction is the last word in the line
         if (words.length-1==lastInstruct) return true;
@@ -202,7 +202,7 @@ public class Parser {
      * @param result Represents, whether the parser found valid code or not
      * @return No return value, because the method uses the input to display a message on the console
      */
-    public static void print(boolean result) {
+    private static void print(boolean result) {
         if (result) System.out.println("File contains valid code");
         else System.out.println("File does not contain valid code");
     }

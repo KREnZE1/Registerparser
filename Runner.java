@@ -31,7 +31,7 @@ public class Runner {
         translateFile(file);
     }
 
-    public void translateFile(File file) {
+    private void translateFile(File file) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = "";
@@ -53,7 +53,7 @@ public class Runner {
         execute();
     }
 
-    public void removeUnnecessaryLines() {
+    private void removeUnnecessaryLines() {
         for (int i=0; i<lines.size(); i++) {
             if (lines.get(i).length() < 3) {
                 lines.remove(lines.get(i)); // Zeilen, die weniger als 3 Zeichen beinhalten werden gelöscht
@@ -76,7 +76,7 @@ public class Runner {
         }
     }
 
-    public void createMarkList() {
+    private void createMarkList() {
         for (int i = 0; i < this.lines.size(); i++) {
             String[] words = this.lines.get(i).split("( |\t)");
             if (words[0].contains(":")) {
@@ -90,7 +90,7 @@ public class Runner {
         }
     }
 
-    public void clean() {
+    private void clean() {
         for (int i=0; i<this.lines.size(); i++) {
             char[] letters = this.lines.get(i).toCharArray();
             boolean allowed = false; //Nach jedem Buchstaben darf einmal ein Leerzeichen vorkommen, danach nicht mehr
@@ -121,7 +121,7 @@ public class Runner {
         }
     }
 
-    public void execute() {
+    private void execute() {
         // An dieser Stelle sollten nur noch die Anweisungen mit ihren Parametern in lines gespeichert sein
         // Kommentare befinden sich lediglich hinter den Anweisungen
         // Zwischen jedem Wort befindet sich genau 1x ' '
@@ -166,13 +166,13 @@ public class Runner {
         }
     }
 
-    public <T> ArrayList<T> insertItemAtPos(int pos, ArrayList<T> list, T val) {
+    private <T> ArrayList<T> insertItemAtPos(int pos, ArrayList<T> list, T val) {
         list.add(pos, val);
         list.remove(pos+1);
         return list;
     }
 
-    public int fetch(int index) {
+    private int fetch(int index) {
         while (this.register.size()<=index) {
             this.register.add(0);
         }
@@ -182,7 +182,7 @@ public class Runner {
 
     //#region Instructions
 
-    public void storeInstruction(String param) {
+    private void storeInstruction(String param) {
         //TODO: targetReg darf nicht 0 sein
         int targetReg = 0;
         if (Character.isDigit(param.charAt(0))) targetReg = Integer.parseInt(param);
@@ -192,7 +192,7 @@ public class Runner {
         this.register = insertItemAtPos(targetReg, this.register, fetch(0));
     }
 
-    public void loadInstruction(String param) {
+    private void loadInstruction(String param) {
         int loadedNum = 0;
         if (Character.isDigit(param.charAt(0))) loadedNum = fetch(Integer.parseInt(param));
         else if (param.charAt(0) == '#') loadedNum = Integer.parseInt(param.substring(1));
@@ -202,7 +202,7 @@ public class Runner {
         this.register = insertItemAtPos(0, this.register, loadedNum);
     }
 
-    public void addInstruction(String param) {
+    private void addInstruction(String param) {
         int addedNum = 0;
         if (Character.isDigit(param.charAt(0))) addedNum = fetch(Integer.parseInt(param));
         else if (param.charAt(0) == '#') addedNum = Integer.parseInt(param.substring(1));
@@ -212,7 +212,7 @@ public class Runner {
         this.register = insertItemAtPos(0, this.register, addedNum);
     }
 
-    public void subtractInstruction(String param) {
+    private void subtractInstruction(String param) {
         int subtractedNum = 0;
         if (Character.isDigit(param.charAt(0))) subtractedNum = fetch(Integer.parseInt(param));
         else if (param.charAt(0) == '#') subtractedNum = Integer.parseInt(param.substring(1));
@@ -223,7 +223,7 @@ public class Runner {
         this.register = insertItemAtPos(0, this.register, subtractedNum);
     }
 
-    public void multiplyInstruction(String param) {
+    private void multiplyInstruction(String param) {
         int multipliedNum = 0;
         if (Character.isDigit(param.charAt(0))) multipliedNum = fetch(Integer.parseInt(param));
         else if (param.charAt(0) == '#') multipliedNum = Integer.parseInt(param.substring(1));
@@ -233,7 +233,7 @@ public class Runner {
         this.register = insertItemAtPos(0, this.register, multipliedNum);
     }
 
-    public void divisionInstruction(String param) {
+    private void divisionInstruction(String param) {
         int dividedNum = 0;
         if (Character.isDigit(param.charAt(0))) dividedNum = fetch(Integer.parseInt(param));
         else if (param.charAt(0) == '#') dividedNum = Integer.parseInt(param.substring(1));
@@ -243,21 +243,21 @@ public class Runner {
         this.register = insertItemAtPos(0, this.register, dividedNum);
     }
 
-    public int goToInstruction(String param, int currLine) {
+    private int goToInstruction(String param, int currLine) {
         for (String key : this.marks.keySet()) {
             if (key.equals(param)) return this.marks.get(key);
         }
         return currLine+1;
     }
 
-    public int jumpIfZeroInstruction(String param, int currLine) {
+    private int jumpIfZeroInstruction(String param, int currLine) {
         if (fetch(0)==0) {
             return goToInstruction(param, currLine);
         }
         return currLine+1;
     }
 
-    public int jumpIfNotZeroInstruction(String param, int currLine) {
+    private int jumpIfNotZeroInstruction(String param, int currLine) {
         if (fetch(0) > 0) {
             return goToInstruction(param, currLine);
         }
@@ -278,7 +278,7 @@ public class Runner {
         }
     }
 
-    public void printRegister() {
+    private void printRegister() {
         for (int i=0; i<this.register.size(); i++) {
             System.out.println("R("+i+") = "+this.register.get(i));
         }
