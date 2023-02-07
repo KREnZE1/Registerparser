@@ -1,0 +1,5 @@
+//Beispiel 2-2 : Die überall undefinierte Funktion
+
+A:	Goto	B
+B:	Goto	A
+	End

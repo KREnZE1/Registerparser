@@ -1,0 +1,33 @@
+//Beispiel 2-9 : Das Listenende (letzte Element einer Liste) wird gesucht
+//genauer: 	In Register 2i müssen Sie die zu speichernde Zahl schreiben, und in R 2i+1 den Zeiger auf das folgende Listenelement. i>=2
+//		Durch R2i+1=0 wird das Ende der Liste signalisiert.
+//		In R1 muss der Zeiger auf das erste Listenelement reingeschrieben werden.
+// 		Die folgenden Instruktionen Speichern den Wert des letzten Listenelemntes in R0
+//		R2 und R3 müssen für Nebenrechnungen frei bleiben.
+
+	
+		//Der Listenkopf wird in R3 geladen
+		Load	1
+		Store	3
+
+		//while R3 ungleich 0 do ... od
+While-Kopf:	Load	3
+		JZero	After-While //nach While Schleife
+	
+		//R2= Wert des aktuellen Listengliedes
+		Load	*3
+		Store	2
+
+		//R3= Position des nächsten Listengliedes
+		Load	3
+		Add	#1
+		Store	3
+		Load	*3
+		Store	3
+
+		GOTO	While-Kopf
+
+		//Nach der While Schleife	
+After-While:	Load	2
+		End
+	

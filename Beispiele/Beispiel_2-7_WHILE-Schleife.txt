@@ -1,0 +1,23 @@
+//Beispiel 2-7 : WHILE Schleife : While c(R1)>c(R2) DO inkrement c(R3); dekrement c(R1) OD
+//Eingabe: R1, R2
+//Erebnis, Ausgabe: c(R0)= Abstand zw. c(R1) und c(R2)
+
+	//Initialisiert das Startregister für ein erfolgreiches Programm
+    //Wenn eine andere Eingabe gewünscht wird muss dieser Block dementsprechend angepasst werden
+	Load #5
+	Store 1
+	Load #2
+	Store 2
+
+Anfang:		Load	1
+		Sub	2
+		JZero	SchleifenEnde
+		Load	3
+		Add	#1
+		Store	3
+		Load	1
+		Sub	#1
+		Store	1
+		Goto	Anfang
+SchleifenEnde:	Load	3
+		End

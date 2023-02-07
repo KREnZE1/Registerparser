@@ -1,0 +1,53 @@
+// Registermaschine als Akzeptor für a hoch n b hoch n
+// a wird mit seinem ASCII-Code 141 und B mit 142 codiert.
+// Registerbelegung
+//   R1   Eingabeposition       Anfangswert 4
+//   R2   Anzahl a – Anzahl b   Anfangswert 0
+//   R3   Ausgabe: 1 für akzeptiert, 0 für nicht akzeptiert
+//   R4 … ab hier das Eingabewort eingeben
+
+         //Initialisiert das Startregister für ein erfolgreiches Programm
+         //Wenn eine andere Eingabe gewünscht wird muss dieser Block dementsprechend angepasst werden
+         LOAD #141
+         STORE 4
+         STORE 5
+         LOAD #142
+         STORE 6
+         STORE 7
+
+         LOAD #4        // R1 initialisieren
+         STORE 1
+         LOAD #0        // R2 und R3 initialisieren
+         STORE 2
+         STORE 3
+
+AZählen: LOAD *1
+         JZERO Fertig   // Ende der Eingabe
+         SUB #141
+         JNZERO BZählen // kein a mehr
+         LOAD 2
+         ADD #1
+         STORE 2
+         LOAD 1         // nächstes Zeichen
+         ADD #1
+         STORE 1
+         GOTO AZählen
+
+BZählen: LOAD *1
+         JZERO Fertig   // Ende der Eingabe
+         SUB #141
+         JZERO Ende     // ein a nach einem b
+         LOAD 2
+         JZERO Ende     // mehr b als a
+         SUB #1
+         STORE 2
+         LOAD 1         // nächstes Zeichen
+         ADD #1
+         STORE 1
+         GOTO BZählen
+
+Fertig:  LOAD 2
+         JNZERO Ende
+         LOAD #1
+         STORE 3
+Ende:    END

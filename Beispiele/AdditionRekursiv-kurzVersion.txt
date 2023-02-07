@@ -1,0 +1,69 @@
+	// Berechnung von m+n rekursiv
+	//Eingabe: c(R4)=m, c(R5)=n
+	//Ergebnis: c(R0)=m+n
+
+	//Initialisiert das Startregister für ein erfolgreiches Programm
+    //Wenn eine andere Eingabe gewünscht wird muss dieser Block dementsprechend angepasst werden
+		Load    #5
+		Store   4
+		Load    #2
+		Store   5
+
+	//Initialisiere top und anzahl
+		Load	#6
+		Store	1
+		Load	#0
+		Store	2
+
+	//*****Stapel Aufbau******
+	//push(m)
+		Load	1
+		Add 	#1
+		Store	1
+		Load	4
+		Store	*1
+		Load	2
+		Add	#1
+		Store	2
+	//****Stapel Aufbau: Schleifenanfang***
+	//peek()
+SchlfAnf:	Load	*1
+		Store	3		//R3="aktuelles" m
+		JZero	StplAbbau //Springe zu Stapel Abbau
+	// push(m-1)
+		Load	1
+		Add	#1
+		Store	1
+		Load	3
+		Sub	#1
+		Store	*1
+		Load	2
+		Add	#1
+		Store	2
+	//Gehe zu "Stapel Aufbau: Schleifenanfang"
+		Goto	SchlfAnf
+
+	//****Stapel Abbau*****
+	//speicher n in *top
+StplAbbau:	Load	5
+		Store	*1
+	//*****Stapel Abbau: Schleifenanfang*****
+	//Addiere 1 zum zureuckgegebenen Ergebnis
+Schlf2Anf:	Load	*1
+		Add	#1
+		Store	3
+	//Dekrementiere top und anzahl
+		Load	1
+		Sub	#1
+		Store	1
+		Load	2
+		Sub	#1
+		Store	2
+	//Wenn der Stapel leer ist, springe zum Ende
+		JZero	Ende
+	//Speicher Rückgabewert int *top
+		Load	3
+		Store	*1
+		Goto	Schlf2Anf
+Ende:		Load	7
+		End

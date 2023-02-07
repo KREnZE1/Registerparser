@@ -1,0 +1,26 @@
+// Berechnung der Fakultaet
+//Eingabe in R1: n
+//Ergebnis in R0: n!
+
+
+//Wir fangen den Fall 0! und 1! ab:
+		Load 1
+		JZero 01Faku
+		Sub #1
+		JZero 01Faku
+
+		Load 1
+		Store 2
+Anfang:		Load 1
+		Sub #1
+		JZero Ende
+		Store 1
+		Mul 2
+		Store 2
+		Goto Anfang
+
+01Faku:		Load #1
+		End
+
+Ende:		LOAD 2
+ 		END

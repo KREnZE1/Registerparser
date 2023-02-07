@@ -1,0 +1,15 @@
+//Beispiel 2-6 : Wertzuweisung c(i):=c(j)*c(k)
+// Eingabe: R1:j; R2:k
+//Ergebnis: R0 und R3
+
+	//Initialisiert das Startregister für ein erfolgreiches Programm
+    //Wenn eine andere Eingabe gewünscht wird muss dieser Block dementsprechend angepasst werden
+	Load #3
+	Store 1
+	Load #2
+	Store 2
+
+	Load	1
+	Mul	2
+	Store	3
+	End

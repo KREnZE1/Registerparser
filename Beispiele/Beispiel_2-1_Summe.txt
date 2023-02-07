@@ -1,0 +1,14 @@
+// Beispiel 2-1: Summe zweier Zahlen
+//Eingabe: c(R1)=a, c(R2)=b,
+//Ergebnis: c(R0)=a+b
+
+	//Initialisiert das Startregister für ein erfolgreiches Programm
+    //Wenn eine andere Eingabe gewünscht wird muss dieser Block dementsprechend angepasst werden
+	Load #4
+	Store 1
+	Load #2
+	Store 2
+
+	Load	1
+	Add	2
+	End

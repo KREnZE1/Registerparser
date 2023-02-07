@@ -1,0 +1,27 @@
+//Beispiel 2-8 : If Then Else
+//genauer: IF c(R1)<=1 THEN c(R2)++ ELSE c(R2)--
+
+		//Initialisiert das Startregister für ein erfolgreiches Programm
+    	//Wenn eine andere Eingabe gewünscht wird muss dieser Block dementsprechend angepasst werden
+		Load #3
+		Store 1
+		Load #2
+		Store 2
+
+		Load	1
+		Sub	#1
+		JZero	If-Zweig
+
+		//Else-Zweig
+		Load	2
+		Sub	#1
+		Store	2
+		Goto	Ende
+
+
+If-Zweig:	Load	2
+		Add	#1
+		Store	2
+
+Ende:		End
+

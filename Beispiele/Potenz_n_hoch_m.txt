@@ -1,0 +1,17 @@
+// Registermaschine für die Berechnung von n hoch m
+// Registerbelegung
+// 	R1	n
+// 	R2 	m
+// 	R3 	Ergebnis
+
+	LOAD #1		// Initialisierung mit Ergebnis = 1
+	STORE 3
+M1:	LOAD 2		// lade Exponent
+	JZERO Ende	// m = 0, Berechnung fertig
+	SUB #1		// m = m - 1
+	STORE 2
+	LOAD 3		
+	MUL 1		// Ergebnis = Ergebnis * n
+	STORE 3
+	GOTO M1		// nächster Schleifendurchlauf
+Ende:	END

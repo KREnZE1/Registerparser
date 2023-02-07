@@ -1,0 +1,13 @@
+// Berechnung des Maximums 
+// Eingabe: R1 und R2
+// Ergebnis: c(R0)=max{c(R1),c(R2)}
+
+		LOAD 1
+		SUB 2
+		JZERO R2-größer
+		// Fall R1 > R2
+		LOAD 1
+		GOTO Ende
+		// Fall R2 >= R1
+R2-größer:	LOAD 2
+Ende:		END

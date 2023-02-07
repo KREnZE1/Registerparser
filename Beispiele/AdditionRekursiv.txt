@@ -1,0 +1,100 @@
+	// Berechnung von m+n rekursiv
+	//Eingabe: c(R4)=m, c(R5)=n
+	//Ergebnis: c(R0)=m+n
+
+	//Initialisiert das Startregister für ein erfolgreiches Programm
+    //Wenn eine andere Eingabe gewünscht wird muss dieser Block dementsprechend angepasst werden
+		Load    #5
+		Store   4
+		Load    #2
+		Store   5
+		
+	//Inititlaisiere top und anzahl
+		Load	#6
+		Store	1
+		Load	#0
+		Store	2
+	//*****Stapel Aufbau******
+	//push(#0)
+		Load	1
+		Add	#1
+		Store	1
+		Load	#0
+		Store	*1
+		Load	2
+		Add	#1
+		Store	2
+	//push(m)
+		Load	1
+		Add 	#1
+		Store	1
+		Load	4
+		Store	*1
+		Load	2
+		Add	#1
+		Store	2
+	//****Stapel Aufbau: Schleifenanfang***
+	//peek()
+SchlfAnf:	Load	*1
+		Store	3		//R3="aktuelles" m
+		JZero	StplAbbau //Springe zu Stapel Abbau
+	//push(#0)
+		Load	1
+		Add	#1
+		Store	1
+		Load	#0
+		Store	*1
+		Load	2
+		Add	#1
+		Store	2
+	// push(m-1)
+		Load	1
+		Add	#1
+		Store	1
+		Load	3
+		Sub	#1
+		Store	*1
+		Load	2
+		Add	#1
+		Store	2
+	//Gehe zu "Stapel Aufbau: Schleifenanfang"
+		Goto	SchlfAnf
+	//****Stapel Abbau*****
+	//dekrement top und anzahlElemente
+StplAbbau:	Load	1
+		Sub	#1
+		Store	1
+		Load	2
+		Sub	#1
+		Store	2
+	//speicher n in *top
+		Load	5
+		Store	*1
+	//*****Stapel Abbau: Schleifenanfang*****
+	// pop()
+Schlf2Anf:	Load	*1
+		Store	3
+		Load	1
+		Sub	#1
+		Store	1
+		Load	2
+		Sub	#1
+		Store	2
+		JZero	Ende	//Springe zum Ende
+	// Dekrementiere top und anzahlElemente
+		Load	1
+		Sub	#1
+		Store	1
+		Load	2
+		Sub	#1
+		Store	2
+	// Addiere 1 zum zurueckgegebenen Wert hinzu
+		Load	3
+		Add	#1
+		Store	3
+	//Speicher (n+1) in *top
+		Load	3
+		Store	*1
+		Goto	Schlf2Anf //Gehe zum Schleifenanfang
+Ende:		Load	7
+		End
