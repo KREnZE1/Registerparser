@@ -13,6 +13,8 @@ public class Runner {
     ArrayList<Integer> register; // Beinhaltet das Register, auf dem das Registermaschinenprogramm operiert
     HashMap<String, Integer> marks; // Beinhaltet alle Marken, zu denen das Registermaschinenprogramm springen kann
 
+    //#region Setup
+
     public Runner() {
         this.lines = new ArrayList<String>();
         this.register = new ArrayList<Integer>();
@@ -45,6 +47,14 @@ public class Runner {
             System.err.println(ioe.getStackTrace() + "\n");
         }
     }
+
+    private void setStartReg(ArrayList<Integer> startReg) {
+        this.register = new ArrayList<>();
+        this.register.add(0);
+        for (Integer i : startReg) this.register.add(i);
+    }
+
+    //#endregion
 
     public void run() {
         removeUnnecessaryLines();
@@ -182,21 +192,22 @@ public class Runner {
 
     //#region Instructions
 
+    //TODO: Eradicate possible 0s as targets for certain actions
+
     private void storeInstruction(String param) {
-        //TODO: targetReg darf nicht 0 sein
         int targetReg = 0;
         if (Character.isDigit(param.charAt(0))) targetReg = Integer.parseInt(param);
         else if (param.charAt(0) == '*') targetReg = fetch(Integer.parseInt(param.substring(1)));
 
-        fetch(targetReg);
+        fetch(targetReg); //Should not be able to be 0
         this.register = insertItemAtPos(targetReg, this.register, fetch(0));
     }
 
     private void loadInstruction(String param) {
         int loadedNum = 0;
-        if (Character.isDigit(param.charAt(0))) loadedNum = fetch(Integer.parseInt(param));
+        if (Character.isDigit(param.charAt(0))) loadedNum = fetch(Integer.parseInt(param)); //Should not be able to be 0
         else if (param.charAt(0) == '#') loadedNum = Integer.parseInt(param.substring(1));
-        else if (param.charAt(0) == '*') loadedNum = fetch(fetch(Integer.parseInt(param.substring(1))));
+        else if (param.charAt(0) == '*') loadedNum = fetch(fetch(Integer.parseInt(param.substring(1)))); //Should not be able to be 0
 
         fetch(0);
         this.register = insertItemAtPos(0, this.register, loadedNum);
@@ -266,6 +277,8 @@ public class Runner {
 
     //#endregion
 
+    //#region IO
+
     public void printCode() {
         for (String line : this.lines) {
             System.out.println(line);
@@ -288,15 +301,16 @@ public class Runner {
         return this.register;
     }
 
+    //#endregion
+
     public static void main(String[] args) {
         Runner r = new Runner();
-        r.setFile(new File("Beispiele\\a_hoch_n_b_hoch_n.txt"));
+        r.setFile(new File("/home/krenze/Programming/Java/Registerparser/Beispiele/Beispiel_2-8_If_Then_Else.txt"));
         ArrayList<Integer> startReg = new ArrayList<Integer>();
+        startReg.add(3);
+        startReg.add(3);
+        r.setStartReg(startReg);
         r.run();
-        // r.printCode();
-        // System.out.print("\n");
-        // r.printMarkList();
-        // System.out.print("\n");
         r.printRegister();
     }
 }
